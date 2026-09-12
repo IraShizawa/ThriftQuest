@@ -1,8 +1,13 @@
 import SwiftUI
+import UIKit
 
 struct RootTabView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var selection = 0
     @State private var keyboardVisible = false
+    @State private var pendingSharedDraft: SharedItemDraft?
+
+    private let sharedDraftStore = SharedDraftStore()
 
     var body: some View {
         TabView(selection: $selection) {
@@ -33,6 +38,27 @@ struct RootTabView: View {
         .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
             keyboardVisible = false
         }
+        .onAppear(perform: loadLatestSharedDraft)
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                loadLatestSharedDraft()
+            }
+        }
+        .onOpenURL { _ in
+            loadLatestSharedDraft()
+        }
+        .sheet(item: $pendingSharedDraft) { draft in
+            NavigationStack {
+                BossRegistrationView(
+                    image: sharedDraftStore.image(for: draft),
+                    initialName: draft.title,
+                    onRegister: {
+                        sharedDraftStore.removeDraft(id: draft.id)
+                        pendingSharedDraft = nil
+                    }
+                )
+            }
+        }
     }
 
     private func tab(_ title: String, icon: String, index: Int) -> some View {
@@ -53,5 +79,9 @@ struct RootTabView: View {
             }
         }.buttonStyle(.plain)
             .accessibilityAddTraits(selection == index ? .isSelected : [])
+    }
+
+    private func loadLatestSharedDraft() {
+        pendingSharedDraft = sharedDraftStore.loadDrafts().first
     }
 }
