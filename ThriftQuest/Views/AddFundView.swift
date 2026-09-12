@@ -3,92 +3,59 @@ import SwiftUI
 struct AddFundView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var store: GameStore
-
     let preselectedBossID: UUID?
-
     @State private var kind: AttackFundKind = .earned
-    @State private var amountText = "6000"
+    @State private var amountText = ""
     @State private var memo = ""
     @State private var date = Date()
-    @State private var isShowingAllocation = false
-
-    private var amount: Int {
-        Int(amountText.filter(\.isNumber)) ?? 0
-    }
+    @State private var saved = false
+    private var amount: Int { Int(amountText) ?? 0 }
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    Picker("種類", selection: $kind) {
-                        ForEach(AttackFundKind.allCases) { kind in
-                            Text(kind.title).tag(kind)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-
-                Section("金額") {
-                    TextField("0", text: $amountText)
-                        .keyboardType(.numberPad)
-                        .font(.system(size: 34, weight: .bold))
+            ScrollView {
+                VStack(alignment: .leading, spacing: 22) {
+                    Picker("POWERの種類", selection: $kind) {
+                        Text("稼いだPOWER").tag(AttackFundKind.earned)
+                        Text("守ったPOWER").tag(AttackFundKind.resisted)
+                    }.pickerStyle(.segmented)
+                    Image(systemName: "bolt.fill")
+                        .font(.system(size: 78)).foregroundStyle(.yellow)
+                        .shadow(color: .orange.opacity(0.4), radius: 5)
+                        .frame(maxWidth: .infinity).padding(.vertical, 16)
                     HStack {
-                        quickAmountButton(1_000)
-                        quickAmountButton(5_000)
-                        quickAmountButton(10_000)
+                        Text("POWER").font(.title3)
+                        Text("+").foregroundStyle(QuestStyle.gold)
+                        TextField("0000", text: $amountText)
+                            .keyboardType(.numberPad).foregroundStyle(QuestStyle.gold)
+                            .font(.title2).monospacedDigit()
+                            .accessibilityLabel("新しく確保した金額、円")
+                            .onChange(of: amountText) { _, text in
+                                amountText = String(text.filter { $0.isASCII && $0.isNumber }.prefix(7))
+                            }
+                    }.questField()
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("メモ").font(.subheadline)
+                        TextField("例：コンビニで使わずに済んだ分", text: $memo, axis: .vertical)
+                            .lineLimit(4...6).questField()
                     }
-                }
-
-                Section("メモ") {
-                    TextField("例）バイト代、コンビニを我慢 など", text: $memo, axis: .vertical)
-                    DatePicker("日付", selection: $date, displayedComponents: .date)
-                }
-
-                Section {
+                    DatePicker("日付", selection: $date, in: ...Date(), displayedComponents: .date)
+                        .font(.subheadline)
+                    Text("今回、新しく目標用に確保した金額を記録。同じお金は一度だけ。")
+                        .font(.caption).foregroundStyle(.secondary)
                     Button {
+                        guard !saved, amount > 0 else { return }
+                        saved = true
                         store.recordPower(kind: kind, amount: amount, memo: memo, date: date)
                         dismiss()
                     } label: {
-                        Label("POWERだけ記録する", systemImage: "bolt.fill")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .disabled(amount <= 0)
-
-                    Button {
-                        isShowingAllocation = true
-                    } label: {
-                        Text("攻略資金に追加")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .disabled(amount <= 0 || store.activeBosses.isEmpty)
-                }
-            }
-            .navigationTitle("攻略資金を追加")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("閉じる") {
-                        dismiss()
-                    }
-                }
-            }
-            .navigationDestination(isPresented: $isShowingAllocation) {
-                AllocationView(
-                    kind: kind,
-                    amount: amount,
-                    memo: memo,
-                    preselectedBossID: preselectedBossID,
-                    onFinish: {
-                        dismiss()
-                    }
-                )
-            }
+                        Label("追加する", systemImage: "dollarsign.circle")
+                    }.buttonStyle(QuestButtonStyle())
+                        .disabled(amount <= 0 || saved).opacity(amount > 0 ? 1 : 0.5)
+                }.padding(28)
+            }.background(QuestBackdrop())
+                .navigationTitle("POWER追加").navigationBarTitleDisplayMode(.inline)
+                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("閉じる") { dismiss() } } }
         }
-    }
-
-    private func quickAmountButton(_ value: Int) -> some View {
-        Button("+\(Formatters.yenText(value))") {
-            amountText = "\(amount + value)"
-        }
-        .buttonStyle(.bordered)
     }
 }

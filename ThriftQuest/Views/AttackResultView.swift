@@ -6,44 +6,31 @@ struct AttackResultView: View {
     var onFinish: () -> Void = {}
 
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
-
-            Image(systemName: "burst.fill")
-                .font(.system(size: 72))
-                .foregroundStyle(.yellow)
-
-            VStack(spacing: 8) {
-                Text("攻撃がヒットした！")
-                    .font(.title.bold())
-                Text("\(Formatters.yenText(result.totalDamage)) DAMAGE")
-                    .font(.title2.bold())
-                    .foregroundStyle(.red)
-            }
-
-            VStack(alignment: .leading, spacing: 12) {
+        ScrollView {
+            VStack(spacing: 20) {
                 ForEach(result.allocations) { allocation in
-                    HStack {
-                        Text(store.bossName(for: allocation.bossID))
-                        Spacer()
-                        Text("+\(Formatters.yenText(allocation.amount))")
-                            .fontWeight(.semibold)
-                    }
+                    HStack(spacing: 14) {
+                        BossImageView(boss: store.boss(for: allocation.bossID), size: 80)
+                        VStack(alignment: .leading, spacing: 7) {
+                            Text(store.bossName(for: allocation.bossID)).font(.subheadline)
+                            Text(QuestStyle.number(allocation.amount) + " DAMAGE")
+                                .font(.headline).foregroundStyle(QuestStyle.gold).monospacedDigit()
+                            if let boss = store.boss(for: allocation.bossID) {
+                                Text(boss.isDefeated ? "ボス撃破！" : "残りHP " + QuestStyle.number(boss.remainingHP))
+                                    .font(.caption).foregroundStyle(boss.isDefeated ? QuestStyle.gold : .secondary)
+                            }
+                        }
+                        Spacer(minLength: 0)
+                    }.padding(10).questPanel()
                 }
-            }
-            .padding()
-            .background(Color(.secondarySystemGroupedBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 14))
-
-            Spacer()
-
-            Button("ホームへ") {
-                onFinish()
-            }
-            .buttonStyle(.borderedProminent)
+            }.padding(24)
         }
-        .padding()
-        .navigationTitle("攻撃結果")
-        .navigationBarTitleDisplayMode(.inline)
+        .background(QuestBackdrop())
+        .safeAreaInset(edge: .bottom) {
+            Button("ホームに戻る", action: onFinish)
+                .buttonStyle(QuestButtonStyle()).padding(24).background(QuestStyle.background)
+        }
+        .navigationTitle("BATTLE RESULT").navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden()
     }
 }

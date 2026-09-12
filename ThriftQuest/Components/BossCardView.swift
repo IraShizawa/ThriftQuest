@@ -36,14 +36,14 @@ struct BossCardView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Button(action: action) {
-                    Label("攻略する", systemImage: "bolt.fill")
+                    Label("攻撃する", systemImage: "figure.fencing")
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.red)
+                .tint(.pink)
             }
         }
         .padding()
-        .background(.background)
+        .background(Color(red: 0.16, green: 0.15, blue: 0.15))
         .clipShape(RoundedRectangle(cornerRadius: 14))
         .overlay {
             RoundedRectangle(cornerRadius: 14)

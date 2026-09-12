@@ -1,39 +1,57 @@
 import SwiftUI
 
 struct RootTabView: View {
-    @EnvironmentObject private var store: GameStore
     @State private var selection = 0
-    @State private var isShowingSharedDraft = false
+    @State private var keyboardVisible = false
 
     var body: some View {
         TabView(selection: $selection) {
-            HomeView()
-                .tabItem {
-                    Label("ホーム", systemImage: "house.fill")
+            HomeView(onRecord: { selection = 1 }).tag(0)
+            RecordsView().tag(1)
+            BossLibraryView().tag(2)
+        }
+        .toolbar(.hidden, for: .tabBar)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if !keyboardVisible {
+                HStack(spacing: 0) {
+                    tab("ホーム", icon: "house", index: 0)
+                    tab("記録", icon: "doc.text", index: 1)
+                    tab("図鑑", icon: "book", index: 2)
                 }
-                .tag(0)
+                .padding(5)
+                .background(QuestStyle.panel, in: Capsule())
+                .overlay(Capsule().stroke(QuestStyle.gold.opacity(0.6), lineWidth: 1))
+                .shadow(color: .black.opacity(0.4), radius: 12, y: -3)
+                .padding(.horizontal, 22).padding(.top, 6).padding(.bottom, 3)
+                .background(QuestStyle.background)
+            }
+        }
+        .tint(QuestStyle.gold)
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+            keyboardVisible = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            keyboardVisible = false
+        }
+    }
 
-            RecordsView()
-                .tabItem {
-                    Label("記録", systemImage: "list.bullet.rectangle")
+    private func tab(_ title: String, icon: String, index: Int) -> some View {
+        Button { selection = index } label: {
+            VStack(spacing: 3) {
+                Image(systemName: icon).font(.system(size: 26, weight: .semibold))
+                    .symbolVariant(.none)
+                Text(title).font(QuestStyle.heading(10))
+            }
+            .foregroundStyle(selection == index ? QuestStyle.gold : .white)
+            .frame(maxWidth: .infinity).frame(height: 53)
+            .background {
+                if selection == index {
+                    Capsule().fill(QuestStyle.field)
+                        .overlay(Capsule().stroke(QuestStyle.gold.opacity(0.8), lineWidth: 0.7))
+                        .padding(.horizontal, 14)
                 }
-                .tag(1)
-
-            BossLibraryView()
-                .tabItem {
-                    Label("図鑑", systemImage: "book.closed.fill")
-                }
-                .tag(3)
-        }
-        .tint(.red)
-        .onOpenURL { url in
-            guard url.scheme == "thriftquest" else { return }
-            store.importSharedDrafts()
-            selection = 0
-            isShowingSharedDraft = true
-        }
-        .sheet(isPresented: $isShowingSharedDraft) {
-            ShareDraftView()
-        }
+            }
+        }.buttonStyle(.plain)
+            .accessibilityAddTraits(selection == index ? .isSelected : [])
     }
 }

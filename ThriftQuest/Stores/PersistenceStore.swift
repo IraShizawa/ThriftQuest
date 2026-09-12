@@ -8,7 +8,6 @@ protocol PersistenceStoring {
 struct GameState: Codable, Equatable {
     var bosses: [Boss]
     var attackResults: [AttackResult]
-    var pendingDrafts: [SharedItemDraft]
 }
 
 final class UserDefaultsPersistenceStore: PersistenceStoring {

@@ -8,13 +8,7 @@ struct BossImageView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .fill(
-                    LinearGradient(
-                        colors: [.orange.opacity(0.18), .blue.opacity(0.16), .mint.opacity(0.14)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                .fill(LinearGradient(colors: [Color(red: 0.22, green: 0.29, blue: 0.32), QuestStyle.panel], startPoint: .topLeading, endPoint: .bottomTrailing))
 
             if let imageData = boss?.imageData, let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
@@ -31,13 +25,16 @@ struct BossImageView: View {
                         .foregroundStyle(.secondary)
                 }
             } else {
+                Circle().stroke(QuestStyle.gold.opacity(0.20), lineWidth: 0.7).padding(size * 0.15)
+                Circle().stroke(QuestStyle.gold.opacity(0.12), lineWidth: 0.5).padding(size * 0.22)
                 Image(systemName: iconName)
                     .font(.system(size: size * 0.36, weight: .semibold))
-                    .foregroundStyle(.primary.opacity(0.75))
+                    .foregroundStyle(QuestStyle.gold.opacity(0.85))
             }
         }
         .frame(width: size, height: size)
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(QuestStyle.gold.opacity(0.4), lineWidth: 0.8))
     }
 
     private var iconName: String {

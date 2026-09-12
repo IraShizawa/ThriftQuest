@@ -5,20 +5,21 @@ struct BossRegistrationView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var store: GameStore
 
-    let generatedImage: UIImage
+    let image: UIImage?
     let onRegister: (() -> Void)?
 
     @State private var name: String
-    @State private var category = "AI生成ボス"
+    @State private var category = "欲しいもの"
     @State private var targetAmountText: String
+    @State private var hasRegistered = false
 
     init(
-        generatedImage: UIImage,
+        image: UIImage? = nil,
         initialName: String = "",
         initialAmount: Int? = nil,
         onRegister: (() -> Void)? = nil
     ) {
-        self.generatedImage = generatedImage
+        self.image = image
         self.onRegister = onRegister
         _name = State(initialValue: initialName)
         _targetAmountText = State(initialValue: initialAmount.map(String.init) ?? "")
@@ -29,43 +30,49 @@ struct BossRegistrationView: View {
     }
 
     var body: some View {
-        Form {
-            Section("ボス画像") {
-                Image(uiImage: generatedImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 260)
-                    .clipShape(RoundedRectangle(cornerRadius: 14))
-            }
-
-            Section("ボス情報") {
-                TextField("例）スニーカードラゴン", text: $name)
-                TextField("カテゴリ", text: $category)
-                TextField("MAX HP（商品の価格）", text: $targetAmountText)
-                    .keyboardType(.numberPad)
-            }
-
-            Section {
-                Button {
-                    registerBoss()
-                } label: {
-                    Label("ボスを登録", systemImage: "shield.fill")
+        ScrollView {
+            VStack(alignment: .leading, spacing: 22) {
+                Text("ボス情報を設定").font(QuestStyle.heading()).frame(maxWidth: .infinity)
+                if let image {
+                    Image(uiImage: image)
+                        .resizable().scaledToFit().frame(height: 220)
                         .frame(maxWidth: .infinity)
+                        .clipShape(RoundedRectangle(cornerRadius: 18))
+                } else {
+                    Image(systemName: "shield.fill")
+                        .font(.system(size: 80)).foregroundStyle(QuestStyle.gold)
+                        .frame(maxWidth: .infinity).frame(height: 180).questPanel()
                 }
-                .disabled(targetAmount <= 0)
-            }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("ボス名").font(.subheadline)
+                    TextField("例）スニーカードラゴン", text: $name).questField()
+                }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("MAX HP").font(.subheadline)
+                    TextField("用意したい金額（円）", text: $targetAmountText)
+                        .keyboardType(.numberPad).questField()
+                        .onChange(of: targetAmountText) { _, text in
+                            targetAmountText = String(text.filter { $0.isASCII && $0.isNumber }.prefix(7))
+                        }
+                }
+                Button("出現させる！", action: registerBoss)
+                    .buttonStyle(QuestButtonStyle())
+                    .disabled(targetAmount <= 0)
+                    .opacity(targetAmount > 0 ? 1 : 0.5)
+            }.padding(32)
         }
-        .navigationTitle("ボス登録")
+        .background(QuestBackdrop())
+        .navigationTitle("ボス登録").navigationBarTitleDisplayMode(.inline)
     }
 
     private func registerBoss() {
-        // 生成画像は既存のBoss.imageDataに保存するため、他の画面の表示処理をそのまま使えます。
+        guard targetAmount > 0, !hasRegistered else { return }
+        hasRegistered = true
         store.addBoss(
-            name: name.isEmpty ? "AI生成ボス" : name,
-            category: category.isEmpty ? "AI生成ボス" : category,
+            name: name.isEmpty ? "欲しいもの" : name,
+            category: category.isEmpty ? "欲しいもの" : category,
             targetAmount: targetAmount,
-            imageData: generatedImage.pngData()
+            imageData: image?.jpegData(compressionQuality: 0.85)
         )
         onRegister?()
         dismiss()

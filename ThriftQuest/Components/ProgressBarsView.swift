@@ -13,7 +13,7 @@ struct ProgressBarsView: View {
                         .fontWeight(.semibold)
                 }
                 ProgressView(value: boss.progress)
-                    .tint(.mint)
+                    .tint(.yellow)
             }
 
             VStack(alignment: .leading, spacing: 6) {

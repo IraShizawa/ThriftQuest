@@ -5,7 +5,6 @@ import Combine
 final class GameStore: ObservableObject {
     @Published private(set) var bosses: [Boss]
     @Published private(set) var attackResults: [AttackResult]
-    @Published private(set) var pendingDrafts: [SharedItemDraft]
     @Published var latestResult: AttackResult?
 
     private let persistence: PersistenceStoring
@@ -16,11 +15,9 @@ final class GameStore: ObservableObject {
         if let state = persistence.loadGameState() {
             bosses = state.bosses
             attackResults = state.attackResults
-            pendingDrafts = state.pendingDrafts
         } else {
             bosses = Boss.sampleData
             attackResults = []
-            pendingDrafts = []
         }
     }
 
@@ -62,10 +59,7 @@ final class GameStore: ObservableObject {
         persist()
     }
 
-    func addDraft(_ draft: SharedItemDraft) {
-        pendingDrafts.insert(draft, at: 0)
-        persist()
-    }
+
 
     func recordPower(kind: AttackFundKind, amount: Int, memo: String, date: Date = Date()) {
         guard amount > 0 else { return }
@@ -75,27 +69,11 @@ final class GameStore: ObservableObject {
         persist()
     }
 
-    func registerDraftAsBoss(_ draft: SharedItemDraft, price: Int) {
-        addBoss(
-            name: draft.title.isEmpty ? "欲しいもの" : draft.title,
-            category: "共有から追加",
-            targetAmount: price,
-            imageData: draft.imageData,
-            imageURL: draft.imageURL,
-            productURL: draft.pageURL
-        )
-        removeDraft(draft)
-    }
 
-    func resistDraftAndCreateFund(_ draft: SharedItemDraft, price: Int) -> AttackFund {
-        removeDraft(draft)
-        return AttackFund(kind: .resisted, amount: price, memo: draft.title, sourceURL: draft.pageURL)
-    }
 
-    func removeDraft(_ draft: SharedItemDraft) {
-        pendingDrafts.removeAll { $0.id == draft.id }
-        persist()
-    }
+
+
+
 
     func applyAttackFund(kind: AttackFundKind, amount: Int, memo: String, allocations: [BossAllocation]) -> AttackResult? {
         let validAllocations = allocations.filter { $0.amount > 0 }
@@ -164,28 +142,15 @@ final class GameStore: ObservableObject {
         bosses.first(where: { $0.id == id })
     }
 
-    func replacePendingDrafts(_ drafts: [SharedItemDraft]) {
-        pendingDrafts = drafts
-        persist()
-    }
 
-    func importSharedDrafts() {
-        let sharedStore = SharedDraftStore()
-        let drafts = sharedStore.load()
-        guard !drafts.isEmpty else { return }
-        for draft in drafts where !pendingDrafts.contains(where: { $0.id == draft.id }) {
-            pendingDrafts.insert(draft, at: 0)
-        }
-        sharedStore.clear()
-        persist()
-    }
+
+
 
     private func persist() {
         persistence.saveGameState(
             GameState(
                 bosses: bosses,
-                attackResults: attackResults,
-                pendingDrafts: pendingDrafts
+                attackResults: attackResults
             )
         )
     }

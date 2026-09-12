@@ -10,6 +10,7 @@ struct StatTileView: View {
             Image(systemName: systemImage)
                 .font(.title2)
                 .frame(width: 34)
+                .foregroundStyle(.yellow)
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.caption)
@@ -22,7 +23,7 @@ struct StatTileView: View {
                 .foregroundStyle(.secondary)
         }
         .padding()
-        .background(.background)
+        .background(Color(red: 0.16, green: 0.15, blue: 0.15))
         .clipShape(RoundedRectangle(cornerRadius: 14))
     }
 }

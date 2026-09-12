@@ -2,7 +2,6 @@ import SwiftUI
 
 struct MyPageView: View {
     @EnvironmentObject private var store: GameStore
-    @State private var isShowingOpenAISettings = false
 
     private var totalSaved: Int {
         store.bosses.reduce(0) { $0 + $1.savedAmount }
@@ -46,36 +45,11 @@ struct MyPageView: View {
                         smallStat(title: "撃破ボス", value: "\(defeatedCount)体", icon: "crown.fill")
                     }
 
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("設定")
-                            .font(.headline)
-                        Button {
-                            isShowingOpenAISettings = true
-                        } label: {
-                            Label("OpenAI APIキー", systemImage: "key.fill")
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(.background)
-                                .clipShape(RoundedRectangle(cornerRadius: 14))
-                        }
-                        .buttonStyle(.plain)
-
-                        Label("Share ExtensionとLive ActivitiesはXcodeのTarget追加後に有効化", systemImage: "info.circle")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .padding()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(.background)
-                            .clipShape(RoundedRectangle(cornerRadius: 14))
-                    }
                 }
                 .padding()
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("マイページ")
-            .navigationDestination(isPresented: $isShowingOpenAISettings) {
-                OpenAIAPIKeySettingsView()
-            }
         }
     }
 
