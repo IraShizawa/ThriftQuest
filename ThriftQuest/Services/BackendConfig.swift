@@ -1,7 +1,7 @@
 import Foundation
 
 enum BackendConfig {
-    static let baseURLString = ""
+    static let baseURLString = "https://thrift-quest.vercel.app/"
 
     static var generateBossImageURL: URL? {
         guard !baseURLString.isEmpty,

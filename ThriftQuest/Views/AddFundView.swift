@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct AddFundView: View {
     @Environment(\.dismiss) private var dismiss
@@ -55,7 +56,17 @@ struct AddFundView: View {
                 }.padding(28)
             }.background(QuestBackdrop())
                 .navigationTitle("POWER追加").navigationBarTitleDisplayMode(.inline)
-                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("閉じる") { dismiss() } } }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) { Button("閉じる") { dismiss() } }
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("完了") { hideKeyboard() }
+                    }
+                }
         }
+    }
+
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

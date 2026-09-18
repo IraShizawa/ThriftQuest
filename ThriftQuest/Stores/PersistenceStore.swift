@@ -1,4 +1,5 @@
 import Foundation
+import WidgetKit
 
 protocol PersistenceStoring {
     func loadGameState() -> GameState?
@@ -14,8 +15,8 @@ final class UserDefaultsPersistenceStore: PersistenceStoring {
     private let key = "savings-rpg-game-state-v1"
     private let defaults: UserDefaults
 
-    init(defaults: UserDefaults = .standard) {
-        self.defaults = defaults
+    init(defaults: UserDefaults? = nil) {
+        self.defaults = defaults ?? UserDefaults(suiteName: AppGroupConfig.identifier) ?? .standard
     }
 
     func loadGameState() -> GameState? {
@@ -26,5 +27,6 @@ final class UserDefaultsPersistenceStore: PersistenceStoring {
     func saveGameState(_ state: GameState) {
         guard let data = try? JSONEncoder().encode(state) else { return }
         defaults.set(data, forKey: key)
+        WidgetCenter.shared.reloadTimelines(ofKind: "ThriftQuestWidget")
     }
 }

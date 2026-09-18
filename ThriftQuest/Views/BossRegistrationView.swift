@@ -16,7 +16,9 @@ struct BossRegistrationView: View {
     @State private var isGenerating = false
     @State private var hasGeneratedImage = false
     @State private var generationError: String?
+    @State private var pendingGenerationError: String?
     @State private var hasRegistered = false
+    @State private var generationTask: Task<Void, Never>?
 
     init(
         image: UIImage? = nil,
@@ -75,31 +77,28 @@ struct BossRegistrationView: View {
                     .buttonStyle(QuestButtonStyle())
                     .disabled(targetAmount <= 0)
                     .opacity(targetAmount > 0 ? 1 : 0.5)
-            }.padding(32)
+            }.padding(32).padding(.bottom, 280)
         }
+        .scrollDismissesKeyboard(.interactively)
+        .background(Color.clear.contentShape(Rectangle()).onTapGesture { hideKeyboard() })
         .background(QuestBackdrop())
-        .overlay {
-            if isGenerating {
-                ZStack {
-                    Color.black.opacity(0.72).ignoresSafeArea()
-                    VStack(spacing: 16) {
-                        ProgressView()
-                            .tint(QuestStyle.gold)
-                            .scaleEffect(1.25)
-                        Text("ボス生成中...")
-                            .font(QuestStyle.heading(22))
-                            .foregroundStyle(QuestStyle.gold)
-                        Text("商品の特徴を残したRPGボスに変換しています。")
-                            .font(.footnote)
-                            .foregroundStyle(QuestStyle.parchment.opacity(0.75))
-                    }
-                    .padding(28)
-                    .questPanel()
-                    .padding(28)
-                }
-            }
+        .fullScreenCover(isPresented: $isGenerating, onDismiss: {
+            generationError = pendingGenerationError
+            pendingGenerationError = nil
+        }) {
+            BossSummoningView(
+                sourceImage: sourceImage,
+                bossName: name.isEmpty ? "欲しいもの" : name,
+                onCancel: cancelGeneration
+            )
         }
         .navigationTitle("ボス登録").navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("完了") { hideKeyboard() }
+            }
+        }
         .alert("AIボス生成に失敗しました", isPresented: Binding(
             get: { generationError != nil },
             set: { if !$0 { generationError = nil } }
@@ -108,6 +107,10 @@ struct BossRegistrationView: View {
         } message: {
             Text(generationError ?? "")
         }
+    }
+
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 
     private func registerBoss() {
@@ -124,26 +127,35 @@ struct BossRegistrationView: View {
     }
 
     private func generateBossImage() {
-        guard let sourceImage else { return }
+        guard let sourceImage, !isGenerating else { return }
 
+        hideKeyboard()
+        generationError = nil
+        pendingGenerationError = nil
         isGenerating = true
-        Task {
+        generationTask = Task { @MainActor in
             do {
                 let generated = try await imageGenerator.generateBossImage(
                     from: sourceImage,
                     bossName: name.isEmpty ? "欲しいもの" : name
                 )
-                await MainActor.run {
-                    bossImage = generated
-                    hasGeneratedImage = true
-                    isGenerating = false
-                }
+                try Task.checkCancellation()
+                bossImage = generated
+                hasGeneratedImage = true
+                isGenerating = false
+                generationTask = nil
             } catch {
-                await MainActor.run {
-                    generationError = error.localizedDescription
-                    isGenerating = false
-                }
+                guard !Task.isCancelled else { return }
+                pendingGenerationError = error.localizedDescription
+                isGenerating = false
+                generationTask = nil
             }
         }
+    }
+
+    private func cancelGeneration() {
+        generationTask?.cancel()
+        generationTask = nil
+        isGenerating = false
     }
 }

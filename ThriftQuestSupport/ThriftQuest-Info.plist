@@ -33,6 +33,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>ボスに登録する写真を撮影するためにカメラを使用します。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>ボスに登録する画像を写真ライブラリから選択します。</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -55,7 +57,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>ボスに登録する画像を写真ライブラリから選択します。</string>
 </dict>
 </plist>

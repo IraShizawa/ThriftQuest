@@ -1,0 +1,58 @@
+{"kind":"deck","id":"pr/jbsprk","name":"Deck"}
+{"kind":"layout","layoutId":"c16494bc-56d6-4043-86ac-1d0bc10f0d1e","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"a9f53e0f-a1f5-441a-a510-bda91a056338","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/437ieq","slide":1,"title":"DAY 4–5 PRESENTATION","textShapes":6}
+{"kind":"textbox","id":"sh/3q5grahk","slide":1,"text":"DAY 4–5 PRESENTATION","textPreview":"DAY 4–5 PRESENTATION","textChars":20,"textLines":1,"bbox":[70,42,1140,30]}
+{"kind":"textbox","id":"sh/4reh0fyp","slide":1,"text":"欲しいものを、ボス攻略に変える","textPreview":"欲しいものを、ボス攻略に変える","textChars":15,"textLines":1,"bbox":[70,86,1140,74]}
+{"kind":"textbox","id":"sh/psnitkza","slide":1,"text":"THRIFTQUEST / 貯金RPG","textPreview":"THRIFTQUEST / 貯金RPG","textChars":19,"textLines":1,"bbox":[70,665,500,24]}
+{"kind":"textbox","id":"sh/u1czulgn","slide":1,"text":"貯金RPG – ThriftQuest","textPreview":"貯金RPG – ThriftQuest","textChars":19,"textLines":1,"bbox":[72,230,900,70]}
+{"kind":"textbox","id":"sh/f2lgnqh8","slide":1,"text":"発表者：伊良 志澤","textPreview":"発表者：伊良 志澤","textChars":9,"textLines":1,"bbox":[72,315,700,45]}
+{"kind":"textbox","id":"sh/gnuhwvyt","slide":1,"text":"衝動買いの瞬間を、次のクエストの始まりに。","textPreview":"衝動買いの瞬間を、次のクエストの始まりに。","textChars":21,"textLines":1,"bbox":[72,430,900,50]}
+{"kind":"shape","id":"sh/ho3yp0ze","slide":1,"bbox":[72,395,180,5]}
+{"kind":"notes","id":"nt/437ieq","slide":1,"text":""}
+{"kind":"slide","id":"sl/upp90l","slide":2,"title":"01 / 作品概要","textShapes":6}
+{"kind":"textbox","id":"sh/w3u9872d","slide":2,"text":"01 / 作品概要","textPreview":"01 / 作品概要","textChars":9,"textLines":1,"bbox":[70,42,1140,30]}
+{"kind":"textbox","id":"sh/v2lsfm1s","slide":2,"text":"貯金を「ボス攻略」として楽しむ","textPreview":"貯金を「ボス攻略」として楽しむ","textChars":15,"textLines":1,"bbox":[70,86,1140,74]}
+{"kind":"textbox","id":"sh/a1cr6hk7","slide":2,"text":"THRIFTQUEST / 貯金RPG","textPreview":"THRIFTQUEST / 貯金RPG","textChars":19,"textLines":1,"bbox":[70,665,500,24]}
+{"kind":"textbox","id":"sh/5snalwju","slide":2,"text":"欲しいスニーカーや旅行をボスとして登録。価格がHPになり、稼いだお金や我慢できた金額をPOWERに変えて攻撃します。","textPreview":"欲しいスニーカーや旅行をボスとして登録。価格がHPになり、稼いだお金や我慢できた金額をPOWERに変えて攻撃します。","textChars":58,"textLines":1,"bbox":[80,230,1080,110]}
+{"kind":"textbox","id":"sh/k7e9cr2p","slide":2,"text":"HPを0にする ＝ 買うためのお金を貯めきる","textPreview":"HPを0にする ＝ 買うためのお金を貯めきる","textChars":22,"textLines":1,"bbox":[80,420,1040,55]}
+{"kind":"textbox","id":"sh/j65sjm14","slide":2,"text":"数字の管理から、達成感のあるゲーム体験へ","textPreview":"数字の管理から、達成感のあるゲーム体験へ","textChars":20,"textLines":1,"bbox":[80,510,1000,42]}
+{"kind":"shape","id":"sh/i5wrahkj","slide":2,"bbox":[80,375,250,5]}
+{"kind":"notes","id":"nt/upp90l","slide":2,"text":""}
+{"kind":"slide","id":"sl/1a4wit","slide":3,"title":"02 / コア機能","textShapes":10}
+{"kind":"textbox","id":"sh/w725gvq9","slide":3,"text":"02 / コア機能","textPreview":"02 / コア機能","textChars":9,"textLines":1,"bbox":[70,42,1140,30]}
+{"kind":"textbox","id":"sh/v6t47qpo","slide":3,"text":"3つの画面で、攻略が続く","textPreview":"3つの画面で、攻略が続く","textChars":12,"textLines":1,"bbox":[70,86,1140,74]}
+{"kind":"textbox","id":"sh/a5kne58j","slide":3,"text":"THRIFTQUEST / 貯金RPG","textPreview":"THRIFTQUEST / 貯金RPG","textChars":19,"textLines":1,"bbox":[70,665,500,24]}
+{"kind":"textbox","id":"sh/5wvmdk76","slide":3,"text":"POWERを記録","textPreview":"POWERを記録","textChars":8,"textLines":1,"bbox":[80,245,260,42]}
+{"kind":"textbox","id":"sh/4b25kfql","slide":3,"text":"稼いだ金額・使わずに守った金額を記録","textPreview":"稼いだ金額・使わずに守った金額を記録","textChars":18,"textLines":1,"bbox":[80,320,260,100]}
+{"kind":"shape","id":"sh/jat4bap0","slide":3,"bbox":[80,390,220,5]}
+{"kind":"textbox","id":"sh/i9kni58f","slide":3,"text":"攻撃する","textPreview":"攻撃する","textChars":4,"textLines":1,"bbox":[390,245,260,42]}
+{"kind":"textbox","id":"sh/lgrm1g7m","slide":3,"text":"POWERを好きなボスへ配分してHPを削る","textPreview":"POWERを好きなボスへ配分してHPを削る","textChars":21,"textLines":1,"bbox":[390,320,260,100]}
+{"kind":"shape","id":"sh/0fil8bq1","slide":3,"bbox":[390,390,220,5]}
+{"kind":"textbox","id":"sh/ap4rah8b","slide":3,"text":"図鑑に残す","textPreview":"図鑑に残す","textChars":5,"textLines":1,"bbox":[700,245,260,42]}
+{"kind":"textbox","id":"sh/vqdsjm9w","slide":3,"text":"撃破したボスをコレクションとして保存","textPreview":"撃破したボスをコレクションとして保存","textChars":18,"textLines":1,"bbox":[700,320,260,100]}
+{"kind":"shape","id":"sh/wrm9crq1","slide":3,"bbox":[700,390,220,5]}
+{"kind":"textbox","id":"sh/hsvalwrm","slide":3,"text":"⚡  POWER        ⚔  攻撃        ▣  図鑑","textPreview":"⚡  POWER        ⚔  攻撃        ▣  図鑑","textChars":34,"textLines":1,"bbox":[80,520,1050,48]}
+{"kind":"notes","id":"nt/1a4wit","slide":3,"text":""}
+{"kind":"slide","id":"sl/g1eyqu","slide":4,"title":"03 / DAY 4–5","textShapes":8}
+{"kind":"textbox","id":"sh/65832lwj","slide":4,"text":"03 / DAY 4–5","textPreview":"03 / DAY 4–5","textChars":12,"textLines":1,"bbox":[70,42,1140,30]}
+{"kind":"textbox","id":"sh/t8zmd0vu","slide":4,"text":"目標と進捗","textPreview":"目標と進捗","textChars":5,"textLines":1,"bbox":[70,86,1140,74]}
+{"kind":"textbox","id":"sh/87q54ve9","slide":4,"text":"THRIFTQUEST / 貯金RPG","textPreview":"THRIFTQUEST / 貯金RPG","textChars":19,"textLines":1,"bbox":[70,665,500,24]}
+{"kind":"textbox","id":"sh/vuh4fad0","slide":4,"text":"目標","textPreview":"目標","textChars":2,"textLines":1,"bbox":[80,220,180,42]}
+{"kind":"textbox","id":"sh/u98n65wf","slide":4,"text":"コア機能を1本の体験としてつなぐ","textPreview":"コア機能を1本の体験としてつなぐ","textChars":16,"textLines":1,"bbox":[80,275,480,48]}
+{"kind":"textbox","id":"sh/hwjmh0v6","slide":4,"text":"進捗","textPreview":"進捗","textChars":2,"textLines":1,"bbox":[700,220,180,42]}
+{"kind":"textbox","id":"sh/gvq58vel","slide":4,"text":"ホーム、記録、攻撃、図鑑を実装\nShare ExtensionとAI生成も動作確認","textPreview":"ホーム、記録、攻撃、図鑑を実装 | Share ExtensionとAI生成も動作確認","textChars":41,"textLines":2,"bbox":[700,275,470,105]}
+{"kind":"shape","id":"sh/3y14jadw","slide":4,"bbox":[80,410,1080,5]}
+{"kind":"textbox","id":"sh/ixsna5wr","slide":4,"text":"現在はTestFlight配布に向けて署名・App Group設定を調整中","textPreview":"現在はTestFlight配布に向けて署名・App Group設定を調整中","textChars":37,"textLines":1,"bbox":[80,485,1080,44]}
+{"kind":"notes","id":"nt/g1eyqu","slide":4,"text":""}
+{"kind":"slide","id":"sl/pmcaej","slide":5,"title":"04 / NEXT","textShapes":8}
+{"kind":"textbox","id":"sh/edojq9c3","slide":5,"text":"04 / NEXT","textPreview":"04 / NEXT","textChars":9,"textLines":1,"bbox":[70,42,1140,30]}
+{"kind":"textbox","id":"sh/1gf21ovu","slide":5,"text":"これから行うこと","textPreview":"これから行うこと","textChars":8,"textLines":1,"bbox":[70,86,1140,74]}
+{"kind":"textbox","id":"sh/0f61sju9","slide":5,"text":"THRIFTQUEST / 貯金RPG","textPreview":"THRIFTQUEST / 貯金RPG","textChars":19,"textLines":1,"bbox":[70,665,500,24]}
+{"kind":"textbox","id":"sh/radkveds","slide":5,"text":"① TestFlightで実機テスト","textPreview":"① TestFlightで実機テスト","textChars":18,"textLines":1,"bbox":[90,230,1000,42]}
+{"kind":"textbox","id":"sh/q94jm9c7","slide":5,"text":"② Share Extensionのサイト別取得精度を改善","textPreview":"② Share Extensionのサイト別取得精度を改善","textChars":29,"textLines":1,"bbox":[90,315,1000,42]}
+{"kind":"textbox","id":"sh/dcv2xovy","slide":5,"text":"③ AIボス生成の体験を磨く","textPreview":"③ AIボス生成の体験を磨く","textChars":14,"textLines":1,"bbox":[90,400,1000,42]}
+{"kind":"textbox","id":"sh/sbm1ojud","slide":5,"text":"④ ウィジェットで毎日の攻略状況を確認","textPreview":"④ ウィジェットで毎日の攻略状況を確認","textChars":19,"textLines":1,"bbox":[90,485,1000,42]}
+{"kind":"textbox","id":"sh/b6hk7ydw","slide":5,"text":"「欲しい」を、買う前に遊べるアプリへ。","textPreview":"「欲しい」を、買う前に遊べるアプリへ。","textChars":19,"textLines":1,"bbox":[90,590,1050,45]}
+{"kind":"shape","id":"sh/a58jytcb","slide":5,"bbox":[90,545,220,5]}
+{"kind":"notes","id":"nt/pmcaej","slide":5,"text":""}

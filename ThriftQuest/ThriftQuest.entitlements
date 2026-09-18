@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.app.shizawa.ira.ThriftQuest</string>
+		<string>group.app.shizawa.ira.ThriftQuestShared</string>
 	</array>
 </dict>
 </plist>

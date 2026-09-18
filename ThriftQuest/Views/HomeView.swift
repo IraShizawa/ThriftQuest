@@ -12,7 +12,6 @@ struct HomeView: View {
     @State private var showingRegistration = false
     @State private var showingManual = false
     @State private var showingAttack = false
-    @State private var showingSettings = false
     @State private var sourceChoice: String?
 
     var body: some View {
@@ -89,10 +88,6 @@ struct HomeView: View {
                     }.buttonStyle(QuestButtonStyle())
                     HStack {
                         Button("画像なしで登録") { sourceChoice = "manual"; showingSource = false }
-                        Spacer()
-                        Button { sourceChoice = "settings"; showingSource = false } label: {
-                            Image(systemName: "gearshape")
-                        }.accessibilityLabel("設定")
                     }.font(.footnote).foregroundStyle(.black)
                 }.padding(30).presentationDetents([.height(290)])
                     .presentationDragIndicator(.visible)
@@ -110,7 +105,6 @@ struct HomeView: View {
                 }
             }
             .sheet(isPresented: $showingManual) { AddBossView() }
-            .sheet(isPresented: $showingSettings) { NavigationStack { MyPageView() } }
             .navigationDestination(isPresented: $showingAttack) {
                 AllocationView(kind: .earned, amount: store.availablePower, memo: "",
                                preselectedBossID: nil, usesExistingPower: true,
@@ -155,7 +149,6 @@ struct HomeView: View {
         case "camera": showingCamera = true
         case "library": showingLibrary = true
         case "manual": showingManual = true
-        case "settings": showingSettings = true
         default: break
         }
         sourceChoice = nil

@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A78C7FC305C1D8100ED242C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A78C7FB305C1D8100ED242C /* WidgetKit.framework */; };
+		2A78C7FE305C1D8100ED242C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A78C7FD305C1D8100ED242C /* SwiftUI.framework */; };
+		2A78C809305C1D8200ED242C /* ThriftQuestWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2A78C7F9305C1D8100ED242C /* ThriftQuestWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7D2000200000000000000002 /* ThriftQuestShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7D2000100000000000000001 /* ThriftQuestShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7D2001300000000000000013 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2001100000000000000011 /* ShareViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2A78C807305C1D8200ED242C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ADB0AF3304D27E500D8D0C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2A78C7F8305C1D8100ED242C;
+			remoteInfo = ThriftQuestWidgetExtension;
+		};
 		7D2000300000000000000003 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2ADB0AF3304D27E500D8D0C1 /* Project object */;
@@ -28,6 +38,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				2A78C809305C1D8200ED242C /* ThriftQuestWidgetExtension.appex in Embed App Extensions */,
 				7D2000200000000000000002 /* ThriftQuestShareExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -36,6 +47,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2A78C7F9305C1D8100ED242C /* ThriftQuestWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ThriftQuestWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A78C7FB305C1D8100ED242C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		2A78C7FD305C1D8100ED242C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		2A78C80E305C1EDA00ED242C /* ThriftQuestWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThriftQuestWidgetExtension.entitlements; sourceTree = "<group>"; };
 		2ADB0AFB304D27E500D8D0C1 /* ThriftQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThriftQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2000100000000000000001 /* ThriftQuestShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ThriftQuestShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D2001000000000000000010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,7 +58,25 @@
 		7D2001200000000000000012 /* ThriftQuestShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThriftQuestShareExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2A78C80C305C1D8200ED242C /* Exceptions for "ThriftQuestWidget" folder in "ThriftQuestWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2A78C7F8305C1D8100ED242C /* ThriftQuestWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2A78C7FF305C1D8100ED242C /* ThriftQuestWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2A78C80C305C1D8200ED242C /* Exceptions for "ThriftQuestWidget" folder in "ThriftQuestWidgetExtension" target */,
+			);
+			path = ThriftQuestWidget;
+			sourceTree = "<group>";
+		};
 		2ADB0AFD304D27E500D8D0C1 /* ThriftQuest */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ThriftQuest;
@@ -52,6 +85,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2A78C7F6305C1D8100ED242C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A78C7FE305C1D8100ED242C /* SwiftUI.framework in Frameworks */,
+				2A78C7FC305C1D8100ED242C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2ADB0AF8304D27E500D8D0C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,11 +111,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A78C7FA305C1D8100ED242C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A78C7FB305C1D8100ED242C /* WidgetKit.framework */,
+				2A78C7FD305C1D8100ED242C /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2ADB0AF2304D27E500D8D0C1 = {
 			isa = PBXGroup;
 			children = (
+				2A78C80E305C1EDA00ED242C /* ThriftQuestWidgetExtension.entitlements */,
 				2ADB0AFD304D27E500D8D0C1 /* ThriftQuest */,
 				7D2000600000000000000006 /* ThriftQuestShareExtension */,
+				2A78C7FF305C1D8100ED242C /* ThriftQuestWidget */,
+				2A78C7FA305C1D8100ED242C /* Frameworks */,
 				2ADB0AFC304D27E500D8D0C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,6 +137,7 @@
 			children = (
 				2ADB0AFB304D27E500D8D0C1 /* ThriftQuest.app */,
 				7D2000100000000000000001 /* ThriftQuestShareExtension.appex */,
+				2A78C7F9305C1D8100ED242C /* ThriftQuestWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +155,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2A78C7F8305C1D8100ED242C /* ThriftQuestWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A78C80D305C1D8200ED242C /* Build configuration list for PBXNativeTarget "ThriftQuestWidgetExtension" */;
+			buildPhases = (
+				2A78C7F5305C1D8100ED242C /* Sources */,
+				2A78C7F6305C1D8100ED242C /* Frameworks */,
+				2A78C7F7305C1D8100ED242C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2A78C7FF305C1D8100ED242C /* ThriftQuestWidget */,
+			);
+			name = ThriftQuestWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = ThriftQuestWidgetExtension;
+			productReference = 2A78C7F9305C1D8100ED242C /* ThriftQuestWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		2ADB0AFA304D27E500D8D0C1 /* ThriftQuest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2ADB0B06304D27E600D8D0C1 /* Build configuration list for PBXNativeTarget "ThriftQuest" */;
@@ -113,6 +190,7 @@
 			);
 			dependencies = (
 				7D2000500000000000000005 /* PBXTargetDependency */,
+				2A78C808305C1D8200ED242C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				2ADB0AFD304D27E500D8D0C1 /* ThriftQuest */,
@@ -150,9 +228,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2660;
+				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
+					2A78C7F8305C1D8100ED242C = {
+						CreatedOnToolsVersion = 27.0;
+					};
 					2ADB0AFA304D27E500D8D0C1 = {
 						CreatedOnToolsVersion = 26.6;
 					};
@@ -177,11 +258,19 @@
 			targets = (
 				2ADB0AFA304D27E500D8D0C1 /* ThriftQuest */,
 				7D2000A0000000000000000A /* ThriftQuestShareExtension */,
+				2A78C7F8305C1D8100ED242C /* ThriftQuestWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2A78C7F7305C1D8100ED242C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2ADB0AF9304D27E500D8D0C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -199,6 +288,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2A78C7F5305C1D8100ED242C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2ADB0AF7304D27E500D8D0C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,6 +313,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2A78C808305C1D8200ED242C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2A78C7F8305C1D8100ED242C /* ThriftQuestWidgetExtension */;
+			targetProxy = 2A78C807305C1D8200ED242C /* PBXContainerItemProxy */;
+		};
 		7D2000500000000000000005 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7D2000A0000000000000000A /* ThriftQuestShareExtension */;
@@ -225,6 +326,72 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2A78C80A305C1D8200ED242C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ThriftQuestWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K3B7YPU4F9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ThriftQuestWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ThriftQuestWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.shizawa.ira.ThriftQuest.ThriftQuestWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2A78C80B305C1D8200ED242C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ThriftQuestWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K3B7YPU4F9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ThriftQuestWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ThriftQuestWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.shizawa.ira.ThriftQuest.ThriftQuestWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		2ADB0B04304D27E600D8D0C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -351,11 +518,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ThriftQuest/ThriftQuest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4J5JZSDFK7;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K3B7YPU4F9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "ThriftQuestSupport/ThriftQuest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -380,11 +548,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ThriftQuest/ThriftQuest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4J5JZSDFK7;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K3B7YPU4F9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "ThriftQuestSupport/ThriftQuest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,11 +577,11 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = ThriftQuestShareExtension/ThriftQuestShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4J5JZSDFK7;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K3B7YPU4F9;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ThriftQuestShareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -435,11 +604,11 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_ENTITLEMENTS = ThriftQuestShareExtension/ThriftQuestShareExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4J5JZSDFK7;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = K3B7YPU4F9;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = ThriftQuestShareExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -459,6 +628,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2A78C80D305C1D8200ED242C /* Build configuration list for PBXNativeTarget "ThriftQuestWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2A78C80A305C1D8200ED242C /* Debug */,
+				2A78C80B305C1D8200ED242C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2ADB0AF6304D27E500D8D0C1 /* Build configuration list for PBXProject "ThriftQuest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

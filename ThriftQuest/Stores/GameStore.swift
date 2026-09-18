@@ -16,7 +16,8 @@ final class GameStore: ObservableObject {
             bosses = state.bosses
             attackResults = state.attackResults
         } else {
-            bosses = Boss.sampleData
+            // New players start with an empty library and add their own goals.
+            bosses = []
             attackResults = []
         }
     }

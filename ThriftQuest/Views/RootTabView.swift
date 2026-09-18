@@ -4,48 +4,30 @@ import UIKit
 struct RootTabView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var selection = 0
-    @State private var keyboardVisible = false
     @State private var pendingSharedDraft: SharedItemDraft?
 
     private let sharedDraftStore = SharedDraftStore()
 
     var body: some View {
         TabView(selection: $selection) {
-            HomeView(onRecord: { selection = 1 }).tag(0)
-            RecordsView().tag(1)
-            BossLibraryView().tag(2)
-        }
-        .toolbar(.hidden, for: .tabBar)
-        .safeAreaInset(edge: .bottom, spacing: 0) {
-            if !keyboardVisible {
-                HStack(spacing: 0) {
-                    tab("ホーム", icon: "house", index: 0)
-                    tab("記録", icon: "doc.text", index: 1)
-                    tab("図鑑", icon: "book", index: 2)
-                }
-                .padding(5)
-                .background(QuestStyle.panel, in: Capsule())
-                .overlay(Capsule().stroke(QuestStyle.gold.opacity(0.6), lineWidth: 1))
-                .shadow(color: .black.opacity(0.4), radius: 12, y: -3)
-                .padding(.horizontal, 22).padding(.top, 6).padding(.bottom, 3)
-                .background(QuestStyle.background)
-            }
+            HomeView(onRecord: { selection = 1 })
+                .tabItem { Label("ホーム", systemImage: "house") }
+                .tag(0)
+            RecordsView()
+                .tabItem { Label("記録", systemImage: "doc.text") }
+                .tag(1)
+            BossLibraryView()
+                .tabItem { Label("図鑑", systemImage: "book") }
+                .tag(2)
         }
         .tint(QuestStyle.gold)
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
-            keyboardVisible = true
+        .onOpenURL { _ in
+            loadLatestSharedDraft()
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-            keyboardVisible = false
-        }
-        .onAppear(perform: loadLatestSharedDraft)
         .onChange(of: scenePhase) { _, phase in
             if phase == .active {
                 loadLatestSharedDraft()
             }
-        }
-        .onOpenURL { _ in
-            loadLatestSharedDraft()
         }
         .sheet(item: $pendingSharedDraft) { draft in
             NavigationStack {
@@ -61,27 +43,12 @@ struct RootTabView: View {
         }
     }
 
-    private func tab(_ title: String, icon: String, index: Int) -> some View {
-        Button { selection = index } label: {
-            VStack(spacing: 3) {
-                Image(systemName: icon).font(.system(size: 26, weight: .semibold))
-                    .symbolVariant(.none)
-                Text(title).font(QuestStyle.heading(10))
-            }
-            .foregroundStyle(selection == index ? QuestStyle.gold : .white)
-            .frame(maxWidth: .infinity).frame(height: 53)
-            .background {
-                if selection == index {
-                    Capsule().fill(QuestStyle.field)
-                        .overlay(Capsule().stroke(QuestStyle.gold.opacity(0.8), lineWidth: 0.7))
-                        .padding(.horizontal, 14)
-                }
-            }
-        }.buttonStyle(.plain)
-            .accessibilityAddTraits(selection == index ? .isSelected : [])
-    }
-
     private func loadLatestSharedDraft() {
-        pendingSharedDraft = sharedDraftStore.loadDrafts().first
+        guard let draft = sharedDraftStore.loadDrafts().first,
+              Date().timeIntervalSince(draft.createdAt) < 10 * 60 else {
+            pendingSharedDraft = nil
+            return
+        }
+        pendingSharedDraft = draft
     }
 }
